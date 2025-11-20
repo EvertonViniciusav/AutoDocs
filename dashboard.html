@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – WebLog</title>
+    <link rel="stylesheet" href="css/painel.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>Menu</h2>
+        <nav>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="#">Empresas</a>
+            <a href="#">Veículos</a>
+            <a href="#">Motoristas</a>
+            <a href="#">Documentos</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+        </nav>
+    </aside>
+
+    <!-- HEADER / TOPBAR -->
+    <div id="header"></div>
+
+    <!-- CONTEÚDO -->
+    <main class="conteudo">
+        <h1 class="titulo-dashboard">Dashboard Geral</h1>
+
+        <section class="cards-container">
+
+            <!-- LINHA 1 -->
+            <div class="card">
+                <h3>Empresas Ativas</h3>
+                <p class="numero" id="empresasAtivas">0</p>
+                <span class="detalhe">Total de empresas cadastradas</span>
+            </div>
+
+            <div class="card">
+                <h3>Veículos Ativos</h3>
+                <p class="numero" id="frotaAtiva">0</p>
+                <span class="detalhe">Total geral de veículos</span>
+            </div>
+
+            <div class="card">
+                <h3>Motoristas Ativos</h3>
+                <p class="numero" id="motoristasAtivos">0</p>
+                <span class="detalhe">Total de motoristas cadastrados</span>
+            </div>
+
+            <div class="card">
+                <h3>Vencimentos Hoje</h3>
+                <p class="numero" id="vencendoHoje">0</p>
+                <span class="detalhe">Documentos que vencem no dia</span>
+            </div>
+
+            <!-- LINHA 2 -->
+            <div class="card">
+                <h3>Próximos 7 Dias</h3>
+                <p class="numero" id="prox7dias">0</p>
+                <span class="detalhe">Documentos prestes a vencer</span>
+            </div>
+
+            <div class="card">
+                <h3>Alertas do Sistema</h3>
+                <p class="numero" id="alertasSistema">0</p>
+                <span class="detalhe">Avisos e pendências</span>
+            </div>
+
+            <div class="card">
+                <h3>Notificações Enviadas Hoje</h3>
+                <p class="numero" id="notificacoesHoje">0</p>
+                <span class="detalhe">WhatsApp e Email</span>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="js/layout.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>
