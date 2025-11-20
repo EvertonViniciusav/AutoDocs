@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresas – WebLog</title>
+
+    <link rel="stylesheet" href="css/painel.css">
+    <link rel="stylesheet" href="css/empresas.css">
+</head>
+
+<body>
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <h2>Menu</h2>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="empresas.html" class="active">Empresas</a>
+            <a href="#">Veículos</a>
+            <a href="#">Motoristas</a>
+            <a href="#">Documentos</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+        </nav>
+    </aside>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- CONTEÚDO -->
+    <main class="conteudo">
+        <div class="topo-listagem">
+            <h1>Empresas Cadastradas</h1>
+
+            <button class="btn-add" id="btnAdicionar">
+                + Adicionar Empresa
+            </button>
+        </div>
+
+        <!-- Campo de Busca -->
+        <div class="busca-container">
+            <input type="text" id="campoBusca" placeholder="Buscar empresa...">
+        </div>
+
+        <!-- Tabela de Empresas -->
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Empresa</th>
+                    <th>CNPJ</th>
+                    <th>Telefone</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody id="listaEmpresas">
+                <!-- Conteúdo gerado pelo JS -->
+            </tbody>
+        </table>
+
+        <!-- Paginação -->
+        <div class="paginacao">
+            <button id="prevPage">◀</button>
+            <span id="paginaAtual">1</span>
+            <button id="nextPage">▶</button>
+        </div>
+
+    </main>
+
+    <script src="js/layout.js"></script>
+    <script src="js/empresas.js"></script>
+
+</body>
+</html>

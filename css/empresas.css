@@ -1,0 +1,122 @@
+/* TÍTULO + BOTÃO */
+.topo-listagem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topo-listagem h1 {
+    color: rgb(0, 191, 255);
+}
+
+/* BOTÃO ADICIONAR */
+.btn-add {
+    background: rgb(0, 191, 255);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background: #4d49ff;
+}
+
+/* CAMPO BUSCA */
+.busca-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#campoBusca {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    background: #2A3038;
+    color: white;
+}
+
+/* TABELA */
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1B1F24;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabela th {
+    background: #2A3038;
+    padding: 15px;
+    text-align: left;
+    color: rgb(0, 191, 255);
+}
+
+.tabela td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.tabela tr:hover {
+    background: #252b31;
+}
+
+/* STATUS */
+.status-ativo {
+    color: #00ff95;
+    font-weight: bold;
+}
+
+.status-inativo {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+/* BOTÕES DE AÇÃO */
+.btn-acao {
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 0.85rem;
+    border: none;
+}
+
+.btn-ver {
+    background: #00bfff;
+    color: white;
+}
+
+.btn-editar {
+    background: #ffaa00;
+    color: black;
+}
+
+.btn-excluir {
+    background: #ff4d4d;
+    color: white;
+}
+
+/* PAGINAÇÃO */
+.paginacao {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginacao button {
+    background: #00bfff;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
