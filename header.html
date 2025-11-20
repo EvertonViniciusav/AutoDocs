@@ -1,11 +1,14 @@
-<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-    <div class="container d-flex">
-      <a class="navbar-brand" href="/painel.html">
-            <img src="/src/LogoBranca.png" alt="Logo" height="100">
-      </a>
-      <div id="dataHora" class="text-white text-end">
-            <div id="data"></div>
-            <div id="hora"></div>
-        </div>
+<header class="topbar">
+    <div class="topbar-left">
+        <img src="/src/LogoBranca.png" alt="WebLog" class="topbar-logo">
     </div>
-</nav>
+
+    <div class="topbar-center">
+        <span class="topbar-user">Olá, <span id="nomeUsuario">Usuário</span></span>
+    </div>
+
+    <div class="topbar-right">
+        <span id="data"></span>
+        <span id="hora"></span>
+    </div>
+</header>
