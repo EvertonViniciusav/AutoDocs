@@ -31,20 +31,15 @@
 
     <!-- CONTEÚDO -->
     <main class="conteudo">
-        <div class="topo-listagem">
-            <h1>Empresas Cadastradas</h1>
 
-            <button class="btn-add" id="btnAdicionar">
-                + Adicionar Empresa
-            </button>
-        </div>
-
-        <!-- Campo de Busca -->
-        <div class="busca-container">
+        <div class="linha-topo">
             <input type="text" id="campoBusca" placeholder="Buscar empresa...">
+            <button class="btn-add" id="btnAdicionar">+ Adicionar Empresa</button>
         </div>
 
-        <!-- Tabela de Empresas -->
+        <h1>Empresas Cadastradas</h1>
+
+        <!-- Tabela -->
         <table class="tabela">
             <thead>
                 <tr>
@@ -52,14 +47,13 @@
                     <th>Empresa</th>
                     <th>CNPJ</th>
                     <th>Telefone</th>
+                    <th>E-mail</th>
                     <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
 
-            <tbody id="listaEmpresas">
-                <!-- Conteúdo gerado pelo JS -->
-            </tbody>
+            <tbody id="listaEmpresas"></tbody>
         </table>
 
         <!-- Paginação -->
@@ -70,6 +64,139 @@
         </div>
 
     </main>
+
+    <!-- MODAL CADASTRAR -->
+    <div id="modalCadastrar" class="modal">
+        <div class="modal-content">
+            <h2>Cadastrar Empresa</h2>
+
+            <form id="formCadastrar">
+
+                <div class="campo">
+                    <label>Empresa *</label>
+                    <input type="text" id="cadNome">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>CNPJ *</label>
+                    <input type="text" id="cadCnpj">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>Telefone *</label>
+                    <input type="text" id="cadTelefone">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>E-mail *</label>
+                    <input type="email" id="cadEmail">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>Status *</label>
+                    <select id="cadStatus">
+                        <option value="">Selecione...</option>
+                        <option value="Ativa">Ativa</option>
+                        <option value="Inativa">Inativa</option>
+                    </select>
+                    <small></small>
+                </div>
+
+                <div class="modal-botoes">
+                    <button type="button" class="btn-fechar" onclick="fecharModal('modalCadastrar')">Cancelar</button>
+                    <button type="submit" id="btnSalvarCad" disabled>Salvar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR -->
+    <div id="modalEditar" class="modal">
+        <div class="modal-content">
+            <h2>Editar Empresa</h2>
+
+            <form id="formEditar">
+
+                <input type="hidden" id="editId">
+
+                <div class="campo">
+                    <label>Empresa *</label>
+                    <input type="text" id="editNome">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>CNPJ *</label>
+                    <input type="text" id="editCnpj">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>Telefone *</label>
+                    <input type="text" id="editTelefone">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>E-mail *</label>
+                    <input type="email" id="editEmail">
+                    <small></small>
+                </div>
+
+                <div class="campo">
+                    <label>Status *</label>
+                    <select id="editStatus">
+                        <option value="">Selecione...</option>
+                        <option value="Ativa">Ativa</option>
+                        <option value="Inativa">Inativa</option>
+                    </select>
+                    <small></small>
+                </div>
+
+                <div class="modal-botoes">
+                    <button type="button" class="btn-fechar" onclick="fecharModal('modalEditar')">Cancelar</button>
+                    <button type="submit" id="btnSalvarEdit" disabled>Salvar Alterações</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL VISUALIZAR -->
+    <div id="modalVisualizar" class="modal">
+        <div class="modal-content visualizar">
+            <h2>Detalhes da Empresa</h2>
+
+            <p><strong>ID:</strong> <span id="vId"></span></p>
+            <p><strong>Nome:</strong> <span id="vNome"></span></p>
+            <p><strong>CNPJ:</strong> <span id="vCnpj"></span></p>
+            <p><strong>Telefone:</strong> <span id="vTelefone"></span></p>
+            <p><strong>E-mail:</strong> <span id="vEmail"></span></p>
+            <p><strong>Status:</strong> <span id="vStatus"></span></p>
+
+            <div class="modal-botoes">
+                <button class="btn-fechar" onclick="fecharModal('modalVisualizar')">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EXCLUIR -->
+    <div id="modalExcluir" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Exclusão</h2>
+            <p>Deseja realmente excluir esta empresa?</p>
+
+            <div class="modal-botoes">
+                <button class="btn-fechar" onclick="fecharModal('modalExcluir')">Cancelar</button>
+                <button id="btnConfirmarExcluir" class="btn-delete">Excluir</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/layout.js"></script>
     <script src="js/empresas.js"></script>

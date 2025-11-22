@@ -1,74 +1,238 @@
-// Dados simulados (depois será puxado do backend)
+// ====== DADOS FAKE ======
+// LISTA TEMPORÁRIA (mock) – substitua depois pelos dados do backend
 let empresas = [
-    { id: 1, nome: "TransLog Transportes", cnpj: "12.345.678/0001-99", telefone: "(67) 99999-1111", status: "Ativo" },
-    { id: 2, nome: "FrotaMax Brasil", cnpj: "98.765.432/0001-44", telefone: "(67) 98888-2222", status: "Ativo" },
-    { id: 3, nome: "Rápido Oeste", cnpj: "28.123.456/0001-09", telefone: "(67) 97777-3333", status: "Inativo" },
-    { id: 4, nome: "Carga Sul", cnpj: "55.987.654/0001-77", telefone: "(67) 96666-4444", status: "Ativo" },
+    { id: 1, nome: "TransLog Brasil", cnpj: "12.345.678/0001-99", telefone: "(11) 99999-0000", email: "contato@translog.com.br", status: "Ativa" },
+    { id: 2, nome: "RotaExpress", cnpj: "22.444.555/0001-88", telefone: "(67) 98888-1212", email: "empresa@rotaexpress.com", status: "Ativa" },
+    { id: 3, nome: "CargaSul", cnpj: "55.111.222/0001-33", telefone: "(21) 97777-3322", email: "suporte@cargasul.com", status: "Inativa" }
 ];
 
-let pagina = 1;
-const itensPorPagina = 5;
+// LISTA ATUAL QUE A TABELA USA
+let empresasFiltradas = [...empresas];
 
-function renderTabela() {
-    let tbody = document.getElementById("listaEmpresas");
-    tbody.innerHTML = "";
+// DESENHA A LISTA NA TABELA
+function atualizarTabela() {
+    const tabela = document.getElementById("listaEmpresas");
+    tabela.innerHTML = "";
 
-    const inicio = (pagina - 1) * itensPorPagina;
-    const fim = inicio + itensPorPagina;
-    const lista = empresas.slice(inicio, fim);
-
-    lista.forEach(emp => {
-        let tr = document.createElement("tr");
-
-        tr.innerHTML = `
-            <td>${emp.id}</td>
-            <td>${emp.nome}</td>
-            <td>${emp.cnpj}</td>
-            <td>${emp.telefone}</td>
-            <td class="${emp.status === 'Ativo' ? 'status-ativo' : 'status-inativo'}">
-                ${emp.status}
-            </td>
-            <td>
-                <button class="btn-acao btn-ver">Ver</button>
-                <button class="btn-acao btn-editar">Editar</button>
-                <button class="btn-acao btn-excluir">Excluir</button>
-            </td>
+    empresasFiltradas.forEach(emp => {
+        tabela.innerHTML += `
+            <tr>
+                <td>${emp.id}</td>
+                <td>${emp.nome}</td>
+                <td>${emp.cnpj}</td>
+                <td>${emp.telefone}</td>
+                <td>${emp.email}</td>
+                <td>${emp.status}</td>
+                <td>
+                    <button class="btn-acao ver" onclick="verEmpresa(${emp.id})">Ver</button>
+                    <button class="btn-acao editar" onclick="editarEmpresa(${emp.id})">Editar</button>
+                    <button class="btn-acao excluir" onclick="abrirExcluir(${emp.id})">Excluir</button>
+                </td>
+            </tr>
         `;
-
-        tbody.appendChild(tr);
     });
-
-    document.getElementById("paginaAtual").textContent = pagina;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    renderTabela();
+// FUNÇÃO DE PESQUISA
+function pesquisarEmpresa() {
+    const texto = document.getElementById("campoBusca").value.toLowerCase();
 
-    // Paginação
-    document.getElementById("nextPage").onclick = () => {
-        if (pagina * itensPorPagina < empresas.length) {
-            pagina++;
-            renderTabela();
-        }
-    };
+    empresasFiltradas = empresas.filter(emp =>
+        emp.nome.toLowerCase().includes(texto) ||
+        emp.cnpj.includes(texto) ||
+        emp.email.toLowerCase().includes(texto)
+    );
 
-    document.getElementById("prevPage").onclick = () => {
-        if (pagina > 1) {
-            pagina--;
-            renderTabela();
-        }
-    };
+    atualizarTabela();
+}
 
-    // Campo de busca
-    document.getElementById("campoBusca").addEventListener("input", (e) => {
-        const texto = e.target.value.toLowerCase();
-        empresas = empresas.filter(emp => emp.nome.toLowerCase().includes(texto) || emp.cnpj.includes(texto));
-        pagina = 1;
-        renderTabela();
+// EVENTO: DIGITAR NO CAMPO DE BUSCA
+document.getElementById("campoBusca").addEventListener("input", pesquisarEmpresa);
+
+// CARREGAR AO ABRIR A PÁGINA
+document.addEventListener("DOMContentLoaded", atualizarTabela);
+
+
+let idExcluir = null;
+
+// ====== LISTAGEM ======
+function carregarTabela() {
+    const tbody = document.getElementById("listaEmpresas");
+    tbody.innerHTML = "";
+
+    empresas.forEach(emp => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${emp.id}</td>
+                <td>${emp.nome}</td>
+                <td>${emp.cnpj}</td>
+                <td>${emp.telefone}</td>
+                <td>${emp.email}</td>
+                <td>${emp.status}</td>
+                <td>
+                    <button class="btn-acao ver" onclick="verEmpresa(${emp.id})">Ver</button>
+                    <button class="btn-acao editar" onclick="editarEmpresa(${emp.id})">Editar</button>
+                    <button class="btn-acao excluir" onclick="abrirExcluir(${emp.id})">Excluir</button>
+                </td>
+            </tr>
+        `;
     });
+}
 
-    // botão adicionar
-    document.getElementById("btnAdicionar").addEventListener("click", () => {
-        alert("Tela de cadastro ainda será criada!");
-    });
+function abrirModal(id) {
+    document.getElementById(id).style.display = "flex";
+}
+
+function fecharModal(id) {
+    document.getElementById(id).style.display = "none";
+}
+
+// ====== VISUALIZAR ======
+function verEmpresa(id) {
+    const emp = empresas.find(e => e.id === id);
+
+    document.getElementById("vId").innerText = emp.id;
+    document.getElementById("vNome").innerText = emp.nome;
+    document.getElementById("vCnpj").innerText = emp.cnpj;
+    document.getElementById("vTelefone").innerText = emp.telefone;
+    document.getElementById("vEmail").innerText = emp.email;
+    document.getElementById("vStatus").innerText = emp.status;
+
+    abrirModal("modalVisualizar");
+}
+
+// ====== EXCLUIR ======
+function abrirExcluir(id) {
+    idExcluir = id;
+    abrirModal("modalExcluir");
+}
+
+document.getElementById("btnConfirmarExcluir").addEventListener("click", () => {
+    empresas = empresas.filter(e => e.id !== idExcluir);
+    carregarTabela();
+    fecharModal("modalExcluir");
 });
+
+// ====== CADASTRAR ======
+document.getElementById("btnAdicionar").addEventListener("click", () => {
+    document.getElementById("formCadastrar").reset();
+    limparValidacao("formCadastrar");
+    document.getElementById("btnSalvarCad").disabled = true;
+    abrirModal("modalCadastrar");
+});
+
+// ====== EDITAR ======
+function editarEmpresa(id) {
+    const emp = empresas.find(e => e.id === id);
+
+    document.getElementById("editId").value = emp.id;
+    document.getElementById("editNome").value = emp.nome;
+    document.getElementById("editCnpj").value = emp.cnpj;
+    document.getElementById("editTelefone").value = emp.telefone;
+    document.getElementById("editEmail").value = emp.email;
+    document.getElementById("editStatus").value = emp.status;
+
+    limparValidacao("formEditar");
+    document.getElementById("btnSalvarEdit").disabled = true;
+
+    abrirModal("modalEditar");
+}
+
+// ====== VALIDAÇÃO ======
+
+function validarFormulario(formId, botaoId) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll("input, select");
+    let valido = true;
+
+    inputs.forEach(campo => {
+        const msg = campo.parentElement.querySelector("small");
+
+        if (campo.value.trim() === "") {
+            campo.classList.add("error");
+            campo.classList.remove("success");
+            msg.style.display = "block";
+            msg.innerText = "Campo obrigatório";
+            valido = false;
+        } else {
+            campo.classList.remove("error");
+            campo.classList.add("success");
+            msg.style.display = "none";
+        }
+
+        if (campo.type === "email" && campo.value.trim() !== "") {
+            const emailValido = /\S+@\S+\.\S+/.test(campo.value);
+            if (!emailValido) {
+                campo.classList.add("error");
+                campo.classList.remove("success");
+                msg.style.display = "block";
+                msg.innerText = "Digite um email válido";
+                valido = false;
+            }
+        }
+    });
+
+    document.getElementById(botaoId).disabled = !valido;
+}
+
+function limparValidacao(formId) {
+    const form = document.getElementById(formId);
+    const inputs = form.querySelectorAll("input, select");
+    const msgs = form.querySelectorAll("small");
+
+    inputs.forEach(i => i.classList.remove("error", "success"));
+    msgs.forEach(m => m.style.display = "none");
+}
+
+// Eventos de validação
+document.getElementById("formCadastrar").addEventListener("input", () => {
+    validarFormulario("formCadastrar", "btnSalvarCad");
+});
+
+document.getElementById("formEditar").addEventListener("input", () => {
+    validarFormulario("formEditar", "btnSalvarEdit");
+});
+
+// ====== SALVAR CADASTRO ======
+document.getElementById("formCadastrar").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const novo = {
+        id: empresas.length ? empresas[empresas.length - 1].id + 1 : 1,
+        nome: document.getElementById("cadNome").value,
+        cnpj: document.getElementById("cadCnpj").value,
+        telefone: document.getElementById("cadTelefone").value,
+        email: document.getElementById("cadEmail").value,
+        status: document.getElementById("cadStatus").value
+    };
+
+    empresas.push(novo);
+    carregarTabela();
+    fecharModal("modalCadastrar");
+});
+
+// ====== SALVAR EDIÇÃO ======
+document.getElementById("formEditar").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const id = parseInt(document.getElementById("editId").value);
+
+    empresas = empresas.map(e =>
+        e.id === id
+            ? {
+                id,
+                nome: document.getElementById("editNome").value,
+                cnpj: document.getElementById("editCnpj").value,
+                telefone: document.getElementById("editTelefone").value,
+                email: document.getElementById("editEmail").value,
+                status: document.getElementById("editStatus").value
+            }
+            : e
+    );
+
+    carregarTabela();
+    fecharModal("modalEditar");
+});
+
+// Inicial
+carregarTabela();

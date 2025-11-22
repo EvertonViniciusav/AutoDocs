@@ -1,122 +1,120 @@
-/* TÍTULO + BOTÃO */
-.topo-listagem {
-    width: 100%;
+.conteudo {
+    padding: 30px;
+}
+
+/* Linha topo */
+.linha-topo {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.topo-listagem h1 {
-    color: rgb(0, 191, 255);
-}
-
-/* BOTÃO ADICIONAR */
-.btn-add {
-    background: rgb(0, 191, 255);
-    color: white;
-    border: none;
-    padding: 12px 22px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.btn-add:hover {
-    background: #4d49ff;
-}
-
-/* CAMPO BUSCA */
-.busca-container {
-    width: 100%;
     margin-bottom: 20px;
 }
 
 #campoBusca {
-    width: 100%;
-    padding: 12px;
-    border-radius: 6px;
-    border: none;
-    background: #2A3038;
-    color: white;
+    width: 300px;
+    padding: 10px;
 }
 
-/* TABELA */
+/* Botão adicionar */
+.btn-add {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+/* Tabela */
 .tabela {
     width: 100%;
     border-collapse: collapse;
-    background: #1B1F24;
-    border-radius: 8px;
-    overflow: hidden;
+    margin-top: 10px;
 }
 
-.tabela th {
-    background: #2A3038;
-    padding: 15px;
-    text-align: left;
-    color: rgb(0, 191, 255);
+.tabela th, .tabela td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
 }
 
-.tabela td {
-    padding: 15px;
-    border-bottom: 1px solid #333;
-}
-
-.tabela tr:hover {
-    background: #252b31;
-}
-
-/* STATUS */
-.status-ativo {
-    color: #00ff95;
-    font-weight: bold;
-}
-
-.status-inativo {
-    color: #ff4d4d;
-    font-weight: bold;
-}
-
-/* BOTÕES DE AÇÃO */
+/* Ações */
 .btn-acao {
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-    font-size: 0.85rem;
+    margin: 0 4px;
+    padding: 6px 10px;
+    border-radius: 6px;
     border: none;
+    cursor: pointer;
 }
 
-.btn-ver {
-    background: #00bfff;
-    color: white;
-}
+.ver { background: #007bff; color: #fff; }
+.editar { background: #ffc107; }
+.excluir { background: #dc3545; color: #fff; }
 
-.btn-editar {
-    background: #ffaa00;
-    color: black;
-}
-
-.btn-excluir {
-    background: #ff4d4d;
-    color: white;
-}
-
-/* PAGINAÇÃO */
-.paginacao {
-    margin-top: 20px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
+/* Modal geral */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
     justify-content: center;
+    align-items: center;
 }
 
-.paginacao button {
-    background: #00bfff;
+.modal-content {
+    width: 420px;
+    background: #1f1f1f;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+/* Visualizar */
+.modal-content.visualizar p {
+    margin-bottom: 8px;
+}
+
+/* Inputs / validações */
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo small {
+    color: #dc3545;
+    display: none;
+    font-size: 12px;
+}
+
+input.error, select.error {
+    border: 2px solid #dc3545;
+}
+
+input.success, select.success {
+    border: 2px solid #28a745;
+}
+
+/* Botões modal */
+.modal-botoes {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-fechar {
+    background: #6c757d;
+    color: #fff;
     border: none;
-    color: white;
     padding: 8px 14px;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 5px;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
 }
